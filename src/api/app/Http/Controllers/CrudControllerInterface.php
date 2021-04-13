@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 interface CrudControllerInterface
 {
-    public function index(ListRequest $request): JSendSuccessResponse;
+    public function index(ListRequest $request, JSendSuccessResponse $response): JSendSuccessResponse;
 
     public function store(Request $request, JSendSuccessResponse $response): JSendSuccessResponse;
 
