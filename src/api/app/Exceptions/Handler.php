@@ -41,9 +41,6 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
     }
 
     /**
@@ -60,12 +57,10 @@ class Handler extends ExceptionHandler
         $response = null;
 
         if (is_a($exception, TokenExpiredException::class) ||
-            is_a($exception, AuthenticationException::class)
+            is_a($exception, AuthenticationException::class) ||
+            is_a($exception, UnauthorizedHttpException::class)
         ){
             $response = new JSendFailResponse($exception->getMessage(), JsonResponse::HTTP_UNAUTHORIZED);
-        }
-        elseif (is_a($exception, UnauthorizedHttpException::class)) {
-            $response = new JSendFailResponse($exception->getMessage(), JsonResponse::HTTP_NOT_FOUND);
         }
         elseif (is_a($exception, NotFoundException::class)) {
             $response = new JSendFailResponse($exception->getMessage(), JsonResponse::HTTP_NOT_FOUND);
