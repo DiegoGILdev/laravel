@@ -5,14 +5,14 @@ services:
     build:
       context: ./php-fpm
     volumes:
-      - ../src/api:/var/api
+      - ../src/api:/src/api
       - ./php-fpm/conf.d/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
   nginx:
     build:
       context: ./nginx
     volumes:
-      - ../src/api:/var/api
+      - ../src/api:/src/api
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/sites/:/etc/nginx/sites-available
       - ./nginx/conf.d/:/etc/nginx/conf.d

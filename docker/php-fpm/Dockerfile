@@ -13,7 +13,7 @@ RUN docker-php-ext-enable xdebug
 RUN apk add composer
 RUN apk add nano
 
-WORKDIR /var/api
+WORKDIR /src/api
 
 CMD ["php-fpm"]
 
