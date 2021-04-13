@@ -1,3 +1,5 @@
+## Laravel boilerplate
+
 [![CI](https://github.com/DiegoGILdev/laravel/actions/workflows/main.yml/badge.svg)](https://github.com/DiegoGILdev/laravel/actions/workflows/main.yml)
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DiegoGILdev_laravel&metric=coverage)](https://sonarcloud.io/dashboard?id=DiegoGILdev_laravel)
