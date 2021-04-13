@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Bill;
 
 use App\Http\Requests\Request;
 
 
-class ShowRequest extends Request
+class StoreRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,10 @@ class ShowRequest extends Request
     public function rules()
     {
         return [
-            'id' => [self::REQUIRED, self::INTEGER],
+            'value' => ['required', 'numeric'],
+            'payed' => ['required', 'boolean'],
+            'recorded' => ['required', 'boolean'],
+            'order_id' => ['required', 'int'],
         ];
     }
 }
