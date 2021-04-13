@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 
 
-class DoctrineRepository implements RepositoryInterface
+abstract class DoctrineRepository implements RepositoryInterface
 {
     /**
      * @param Paginator $paginator
