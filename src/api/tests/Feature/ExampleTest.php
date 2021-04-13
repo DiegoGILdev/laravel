@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -14,8 +15,8 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $response = $this->get('/api/products');
 
-        $response->assertStatus(200);
+        $response->assertStatus(JsonResponse::HTTP_UNAUTHORIZED);
     }
 }
