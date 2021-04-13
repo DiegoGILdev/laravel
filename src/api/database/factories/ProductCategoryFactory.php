@@ -25,10 +25,8 @@ class ProductCategoryFactory extends Factory
     public function definition()
     {
         $faker = FakerFactory::create();
-//        $faker->addProvider(new Commerce($faker));
 
         return [
-//            'name' => $faker->category(),
             'name' => $faker->lexify(),
         ];
     }
