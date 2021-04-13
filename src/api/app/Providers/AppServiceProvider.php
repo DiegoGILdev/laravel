@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Helpers\FilterHelper;
 use App\Repositories\EloquentRepository;
-use App\Repositories\RepositoryInterface;
-use App\Services\ProductCrudService;
+use App\Repositories\CrudRepositoryInterface;
+use App\Services\ProductService;
 use App\Services\CrudServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,8 +17,8 @@ class AppServiceProvider extends ServiceProvider
      * @var array
      */
     public $singletons = [
-        RepositoryInterface::class => EloquentRepository::class,
-        CrudServiceInterface::class => ProductCrudService::class,
+        CrudRepositoryInterface::class => EloquentRepository::class,
+        CrudServiceInterface::class => ProductService::class,
     ];
 
     /**

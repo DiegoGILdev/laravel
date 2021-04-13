@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 
-interface RepositoryInterface
+interface CrudRepositoryInterface
 {
-    public function getModelName(): string;
-
     public function getAll(Paginator $paginator): Collection;
 
     public function get(int $productId): ?Model;

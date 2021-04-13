@@ -57,8 +57,8 @@ class ListRequest extends Request
     public function rules()
     {
         return [
-            self::PARAM_LIMIT => self::INTEGER,
-            self::PARAM_SORT_COLUMN => self::STRING,
+            self::PARAM_LIMIT => 'int',
+            self::PARAM_SORT_COLUMN => 'string',
             self::PARAM_SORT_DIRECTION => Rule::in(Sorting::ASC, Sorting::DESC),
         ];
     }

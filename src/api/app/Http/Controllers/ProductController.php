@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ProductCrudService;
+use App\Http\Requests\Product\StoreRequest;
+use App\Http\Responses\JSendSuccessResponse;
+use App\Services\ProductService;
 
 
-class ProductController extends Controller
+class ProductController extends CrudController
 {
-    use CrudController;
-
     /**
-     * @param ProductCrudService $service
+     * @param ProductService $service
      */
-    public function __construct(ProductCrudService $service)
+    public function __construct(ProductService $service)
     {
         $this->service = $service;
+    }
+
+    public function store(JSendSuccessResponse $response): JSendSuccessResponse
+    {
+        $this->request = app(StoreRequest::class);
+
+        return CrudController::store($response);
     }
 }

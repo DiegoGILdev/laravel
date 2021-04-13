@@ -5,10 +5,8 @@ namespace App\Services;
 use App\Repositories\BillRepository;
 
 
-class BillCrudService implements CrudServiceInterface
+class BillCrudService extends CrudService
 {
-    use CrudService;
-
     public function __construct(BillRepository $billRepository)
     {
         $this->repository = $billRepository;

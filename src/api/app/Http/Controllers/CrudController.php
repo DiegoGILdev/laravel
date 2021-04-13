@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ListRequest;
+use App\Http\Requests\RequestInterface;
 use App\Http\Responses\JSendSuccessResponse;
 use App\Services\CrudServiceInterface;
 use Illuminate\Http\Request;
 
-trait CrudController
+class CrudController extends Controller implements CrudControllerInterface
 {
+    protected RequestInterface $request;
     protected CrudServiceInterface $service;
 
     /**
@@ -28,13 +30,12 @@ trait CrudController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
      * @param JSendSuccessResponse $response
      * @return JSendSuccessResponse
      */
-    public function store(Request $request, JSendSuccessResponse $response): JSendSuccessResponse
+    public function store(JSendSuccessResponse $response): JSendSuccessResponse
     {
-        $model = $this->service->save($request->toArray());
+        $model = $this->service->save($this->request->toArray());
 
         return $response->setData($model);
     }

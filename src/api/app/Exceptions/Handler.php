@@ -8,6 +8,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -61,6 +62,9 @@ class Handler extends ExceptionHandler
             is_a($exception, UnauthorizedHttpException::class)
         ){
             $response = new JSendFailResponse($exception->getMessage(), JsonResponse::HTTP_UNAUTHORIZED);
+        }
+        elseif (is_a($exception, ValidationException::class)) {
+            $response = new JSendFailResponse($exception->getMessage(), JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
         elseif (is_a($exception, NotFoundException::class)) {
             $response = new JSendFailResponse($exception->getMessage(), JsonResponse::HTTP_NOT_FOUND);

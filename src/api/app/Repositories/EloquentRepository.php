@@ -3,10 +3,8 @@
 namespace App\Repositories;
 
 
-class EloquentRepository implements RepositoryInterface
+class EloquentRepository extends EloquentCrudRepository
 {
-    use CrudEloquentRepository;
-
     public function getModelName(): string
     {
         $classPaths = explode('\\', get_class($this->model));

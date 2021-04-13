@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 
-trait CrudEloquentRepository
+class EloquentCrudRepository implements CrudRepositoryInterface
 {
     protected Model $model;
 

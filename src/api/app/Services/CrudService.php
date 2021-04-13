@@ -4,14 +4,14 @@ namespace App\Services;
 
 use App\Exceptions\NotFoundException;
 use App\Helpers\Paginator;
-use App\Repositories\RepositoryInterface;
+use App\Repositories\CrudRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 
-trait CrudService
+class CrudService implements CrudServiceInterface
 {
-    protected RepositoryInterface $repository;
+    protected CrudRepositoryInterface $repository;
 
     /**
      * @param Paginator $paginator

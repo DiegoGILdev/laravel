@@ -5,10 +5,8 @@ namespace App\Services;
 use App\Repositories\ProductRepository;
 
 
-class ProductCrudService implements CrudServiceInterface
+class ProductService extends CrudService
 {
-    use CrudService;
-
     /**
      * @param ProductRepository $productRepository
      */
