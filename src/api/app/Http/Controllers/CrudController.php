@@ -7,7 +7,6 @@ use App\Http\Responses\JSendSuccessResponse;
 use App\Services\CrudServiceInterface;
 use Illuminate\Http\Request;
 
-
 trait CrudController
 {
     protected CrudServiceInterface $service;

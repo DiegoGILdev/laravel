@@ -28,9 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-//        $this->app->singleton(FilterHelper::class, function () {
-//            return new FilterHelper("ok");
-//        });
     }
 
     /**
