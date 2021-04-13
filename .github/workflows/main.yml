@@ -1,0 +1,98 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_DATABASE: mydb
+          MYSQL_USER: myuser
+          MYSQL_PASSWORD: secret
+          MYSQL_ROOT_PASSWORD: docker
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Disable shallow clone
+        uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+      - name: MySql
+        run: |
+          sleep 5
+          mysql -h 127.0.0.1 -u myuser -psecret -D mydb < src/api/database/dumps/dump.sql
+      - name: Setup PHP with PECL extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+#          extensions: mongodb-1.5.3
+      - name: List PHP modules
+        run: php -m
+      - name: Install and run Composer
+        uses: php-actions/composer@v5 # or alternative dependency management
+        with:
+          php_version: 7.4
+          version: 2
+          args: --working-dir=src/api
+      - name: Display autoload content
+        run: cat src/api/vendor/composer/autoload_static.php
+      - name: PhpUnit
+        run: |
+          echo $DB_USERNAME
+          echo $DB_PASSWORD
+          export XDEBUG_MODE=coverage
+          src/api/vendor/bin/phpunit -c src/api/phpunit_ci.xml src/api/tests
+          ls -lah src/api
+          sed -i 's/\/home\/runner\/work\/laravel\/laravel\///' src/api/report_test.xml
+          sed -i 's/\/home\/runner\/work\/laravel\/laravel\///' src/api/report_coverage.xml
+          cat src/api/report_test.xml
+          cat src/api/report_coverage.xml
+#        env:
+#          APP_ENV: testing
+#          DB_USERNAME: myuser
+#          DB_PASSWORD: secret
+#      - name: Install and run PHPUnit tests
+#        uses: php-actions/phpunit@v2
+#        with:
+#          php_extensions: xdebug
+##          bootstrap: src/api/vendor/autoload.php
+#          configuration: src/api/phpunit_ci.xml
+#          php_version: 7.4
+#          args: --log-junit src/api/report_test.xml
+#        env:
+#          XDEBUG_MODE: coverage
+#          APP_KEY: base64:+p6FwGMDDgagMIMCYZSx1U/avA12ztVLjQdhhvNGXw4=
+#      - name: List api files
+#        run: ls -lah src/api
+#      - name: Display report coverage content
+#        run: cat src/api/report_coverage.xml
+#      - name: Display coverage report content
+#        run: cat src/api/coverage_report.xml
+#      - name: Display test report content
+#        run: cat src/api/test_report.xml
+      - name: Run SonarCloud scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: e6a85d9e0c480328c9e3bfa171c2f2c25ab1f577
+          GITHUB_TOKEN: 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
