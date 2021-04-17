@@ -17,9 +17,20 @@ class RedisAdapterTest extends TestCase
         $key = 'test_key';
         $expected = 200;
 
-        $redisAdapter->store($key, $expected);
-        $actual = $redisAdapter->get('test_key');
-
+        $redisAdapter->store($key, $expected, 120);
+        $actual = $redisAdapter->get($key);
         $this->assertEquals($expected, $actual);
+
+        $expected = 201;
+        $actual = $redisAdapter->increment($key);
+        $this->assertEquals($expected, $actual);
+
+        $expected = 200;
+        $actual = $redisAdapter->decrement($key);
+        $this->assertEquals($expected, $actual);
+
+        $redisAdapter->delete($key);
+        $actual = $redisAdapter->get($key);
+        $this->assertNull($actual);
     }
 }
