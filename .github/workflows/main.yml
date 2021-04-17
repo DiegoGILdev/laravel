@@ -30,6 +30,10 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
           - 3306:3306
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
