@@ -9,6 +9,8 @@ RUN pecl install mongodb
 RUN docker-php-ext-enable mongodb
 RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
+RUN pecl install redis
+RUN docker-php-ext-enable redis
 
 RUN apk add composer
 RUN apk add nano

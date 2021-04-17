@@ -1,36 +1,36 @@
 <?php
 
-namespace Tests\Feature\Controllers;
+namespace Tests\Functional\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
 
-class BillControllerTest extends TestCase
+class ProductControllerTest extends TestCase
 {
-    private const BILL_URL_PATH = '/api/bills';
+    private const PRODUCT_URL_PATH = '/api/products';
 
     public function test_index_ok_whenValidToken()
     {
-        $response = $this->get(self::BILL_URL_PATH, $this->headers);
+        $response = $this->get(self::PRODUCT_URL_PATH, $this->headers);
 
         $response->assertStatus(JsonResponse::HTTP_OK);
     }
 
     public function test_index_unauthorized_whenInvalidToken()
     {
-        $response = $this->get(self::BILL_URL_PATH);
+        $response = $this->get(self::PRODUCT_URL_PATH);
 
         $response->assertStatus(JsonResponse::HTTP_UNAUTHORIZED);
     }
 
     public function test_store_ok_whenValidRequestAndToken()
     {
-        $url = self::BILL_URL_PATH;
+        $url = self::PRODUCT_URL_PATH;
         $data = [
-            'value' => 1999.90,
-            'payed' => true,
-            'recorded' => true,
-            'order_id' => 1,
+            'name' => 'new product',
+            'description' => 'new description',
+            'price' => 1999.90,
+            'product_categories_id' => 1,
         ];
 
         $response = $this->post($url, $data, $this->headers);
@@ -40,7 +40,7 @@ class BillControllerTest extends TestCase
 
     public function test_store_unauthorized_whenInvalidToken()
     {
-        $url = self::BILL_URL_PATH;
+        $url = self::PRODUCT_URL_PATH;
         $data = [];
 
         $response = $this->post($url, $data);
@@ -50,7 +50,7 @@ class BillControllerTest extends TestCase
 
     public function test_show_ok_whenValidToken()
     {
-        $url = self::BILL_URL_PATH . '/1';
+        $url = self::PRODUCT_URL_PATH . '/1';
 
         $response = $this->get($url, $this->headers);
 
@@ -59,7 +59,7 @@ class BillControllerTest extends TestCase
 
     public function test_show_unauthorized_whenInvalidToken()
     {
-        $url = self::BILL_URL_PATH . '/1';
+        $url = self::PRODUCT_URL_PATH . '/1';
 
         $response = $this->get($url);
 
@@ -68,7 +68,7 @@ class BillControllerTest extends TestCase
 
     public function test_update_ok_whenValidToken()
     {
-        $url = self::BILL_URL_PATH . '/1';
+        $url = self::PRODUCT_URL_PATH . '/1';
         $data = [
             'price' => 100.90,
         ];
@@ -80,7 +80,7 @@ class BillControllerTest extends TestCase
 
     public function test_update_unauthorized_whenInvalidToken()
     {
-        $url = self::BILL_URL_PATH . '/1';
+        $url = self::PRODUCT_URL_PATH . '/1';
         $data = [];
 
         $response = $this->put($url, $data);
@@ -90,7 +90,7 @@ class BillControllerTest extends TestCase
 
     public function test_destroy_ok_whenValidToken()
     {
-        $url = self::BILL_URL_PATH . '/1';
+        $url = self::PRODUCT_URL_PATH . '/1';
         $data = [];
 
         $response = $this->delete($url, $data, $this->headers);
@@ -100,7 +100,7 @@ class BillControllerTest extends TestCase
 
     public function test_destroy_unauthorized_whenInvalidToken()
     {
-        $url = self::BILL_URL_PATH . '/1';
+        $url = self::PRODUCT_URL_PATH . '/1';
         $data = [];
 
         $response = $this->delete($url, $data);
