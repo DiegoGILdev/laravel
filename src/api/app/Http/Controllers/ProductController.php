@@ -17,10 +17,10 @@ class ProductController extends CrudController
         $this->service = $service;
     }
 
-    public function store(JSendSuccessResponse $response): JSendSuccessResponse
+    public function store(): JSendSuccessResponse
     {
         $this->request = app(StoreRequest::class);
 
-        return CrudController::store($response);
+        return CrudController::store();
     }
 }
