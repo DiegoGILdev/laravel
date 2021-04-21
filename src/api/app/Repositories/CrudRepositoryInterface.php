@@ -15,7 +15,7 @@ interface CrudRepositoryInterface
 
     public function save(array $data): Model;
 
-    public function update(int $productId, array $data): ?Model;
+    public function update(int $id, array $data): ?Model;
 
     public function delete(int $productId): ?bool;
 }

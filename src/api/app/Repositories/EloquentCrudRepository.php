@@ -43,9 +43,9 @@ class EloquentCrudRepository implements CrudRepositoryInterface
         return $this->model;
     }
 
-    public function update(int $productId, array $data): ?Model
+    public function update(int $id, array $data): ?Model
     {
-        $firstModel = $this->model::query()->where(ModelBase::ID, $productId)->first();
+        $firstModel = $this->model::query()->where(ModelBase::ID, $id)->first();
 
         if (is_null($firstModel)) {
             return null;
