@@ -9,12 +9,16 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "elasticsearch/elasticsearch": "^7.12",
+        "ezimuel/ringphp": "^1.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "predis/predis": "^1.1",
+        "reactivex/rxphp": "^2.0",
+        "rx/http": "^2.1",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

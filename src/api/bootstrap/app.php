@@ -13,6 +13,8 @@
 
 use App\Adapters\Cache\CacheAdapterInterface;
 use App\Adapters\Cache\RedisAdapter;
+use App\Adapters\RestApi\GuzzleAdapter;
+use App\Adapters\RestApi\RestApiAdapterInterface;
 
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
@@ -47,6 +49,11 @@ $app->singleton(
 $app->singleton(
     CacheAdapterInterface::class,
     RedisAdapter::class
+);
+
+$app->singleton(
+    RestApiAdapterInterface::class,
+    GuzzleAdapter::class
 );
 
 /*
