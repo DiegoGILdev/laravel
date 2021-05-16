@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Bill\StoreRequest;
 use App\Http\Responses\JSendSuccessResponse;
-use App\Services\BillCrudService;
+use App\Services\BillService;
 
 
 class BillController extends CrudController implements CrudControllerInterface
 {
-    public function __construct(BillCrudService $billService)
+    public function __construct(BillService $billService)
     {
         $this->service = $billService;
     }

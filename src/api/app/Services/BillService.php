@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Repositories\BillRepository;
 
 
-class BillCrudService extends CrudService
+class BillService extends CrudService
 {
     public function __construct(BillRepository $billRepository)
     {
