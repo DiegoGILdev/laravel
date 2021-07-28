@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\EditCountController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,5 @@ Route::prefix('auth')->group(function () {
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::apiResource('products', ProductController::class);
     Route::apiResource('bills', BillController::class);
+    Route::get('edit_count', EditCountController::class . '@list');
 });
